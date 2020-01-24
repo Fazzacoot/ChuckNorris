@@ -13,6 +13,18 @@ class ChuckNorrisAPI extends RESTDataSource {
     };
   }
 
+  jokeObj(joke) {
+    return {
+      id: joke.id,
+      category: joke.categories[0],
+      iconUrl: joke.icon_url,
+      url: joke.url,
+      value: joke.value,
+      createdAt: joke.created_at,
+      updatedAt: joke.updated_at
+    };
+  }
+
   async getCategories() {
     const res = await this.get("categories");
     return Array.isArray(res)
@@ -20,6 +32,11 @@ class ChuckNorrisAPI extends RESTDataSource {
           return this.categoryObj(category, index);
         })
       : [];
+  }
+
+  async getJoke({ category }) {
+    const res = await this.get("random", { category });
+    return this.jokeObj(res);
   }
 }
 
