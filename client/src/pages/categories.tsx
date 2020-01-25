@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react'
-import { Link, RouteComponentProps } from 'react-router-dom'
+import React from 'react'
+import { RouteComponentProps } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import * as CategoryTypes from './__generated__/NorrisCategories';
@@ -8,7 +8,7 @@ import { useStyles } from '../styles/pages/categores';
 import Grid from '@material-ui/core/Grid';
 import preloader from '../assets/images/preloader.gif';
 
-const CATEGORIES = gql`
+export const CATEGORIES = gql`
   query NorrisCategories{
   categories{
     id
@@ -18,7 +18,7 @@ const CATEGORIES = gql`
 `;
 
 interface CategoryProps extends RouteComponentProps {
-  category: CategoryTypes.NorrisCategories_categories;
+  // category: CategoryTypes.NorrisCategories_categories;
  }
 
 const Categories: React.FC<CategoryProps> = () => {

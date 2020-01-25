@@ -12,6 +12,7 @@ import { useStyles } from '../styles/components/categoryCards';
 import { gql } from 'apollo-boost';
 import * as JokeTypes from './__generated__/getJoke';
 import { useQuery } from '@apollo/react-hooks';
+import { Link } from 'react-router-dom';
 
 
 const JOKE = gql`
@@ -37,11 +38,12 @@ const CategoryCard: React.FC<CategoryProps> = ({ category }) => {
     data,
     error,
     refetch
-  } = useQuery<JokeTypes.getJoke, JokeTypes.getJokeVariables >(JOKE, { variables: { category: category.name! } });
-  
+  } = useQuery<JokeTypes.getJoke, JokeTypes.getJokeVariables>(JOKE, { variables: { category: category.name! } });
+
 
   const { id, name } = category;
   const [jokeText, setJokeText] = useState("Get ready to laugh");
+  const [showMore, setShowMore] = useState(false);
 
   const classes = useStyles();
 
@@ -49,6 +51,7 @@ const CategoryCard: React.FC<CategoryProps> = ({ category }) => {
     refetch();
     if (error) return setJokeText(`Error ${error.message}`);
     if (!data) return setJokeText("No joke found");
+    setShowMore(true);
     return setJokeText(joke);
   }
 
@@ -75,6 +78,17 @@ const CategoryCard: React.FC<CategoryProps> = ({ category }) => {
         <Button size="large" color="primary" onClick={hadleSetJoke.bind(null, data?.joke?.value!)}>
           Make me laugh
         </Button>
+        {
+          showMore &&
+          <Button size="large" color="primary">
+            <Link to={{
+              pathname: "/showmore",
+              state:{
+                jokeObj: data?.joke
+              }
+            }} > Show More </Link>
+          </Button>
+        }
       </CardActions>
     </Card>
   );

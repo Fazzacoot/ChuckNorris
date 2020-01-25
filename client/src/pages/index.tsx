@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Categories from './categories';
-import { Footer } from '../components';
+import ShowMore from './showmore';
+// import { Footer } from '../components';
 import styled from 'styled-components';
 
 
@@ -10,6 +11,7 @@ export default function App() {
     <Container>
       <Switch>
         <Route exact path="/" component={Categories} />
+        <Route exact path="/showmore" component={ShowMore} />
       </Switch>
       {/* <Footer /> */}
     </Container>
