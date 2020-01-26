@@ -6,7 +6,8 @@ export const useStyles = makeStyles((theme: Theme) =>
       background: "#ffdd00"
     },
     container: {
-      border: "1px solid #f4f4f4"
+      border: "1px solid #f4f4f4",
+      overflow: "hidden"
     },
     second: {
       background: "#f4f4f4"
